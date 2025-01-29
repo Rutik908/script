@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+
+        *{
+            /* margin: 0; */
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            background-color: #fcffee;
+        }
+
+        #submit{
+            background-color: #BB9AB1;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+
+    <form action="">
+
+        <div id="container">
+
+        </div>
+        <br>
+
+        <button id="submit">submit test</button>
+    </form>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const Quiz_question = [
+        { question: "What is Javascript ?", options: ["JavaScript is a scripting language used to make the website interactive", "JavaScript is an assembly language used to make the website interactive", "JavaScript is a compiled language used to make the website interactive", "None of the mentioned"], answer: "JavaScript is a scripting language used to make the website interactive" },
+        { question: "PHP stands for ?", options: ["Hypertext Preprocessor", "Pretext Hypertext Preprocessor", "Personal Home Processor", "None of the above"], answer: "Hypertext Preprocessor" },
+        { question: "Who is known as the father of PHP?", options: ["Drek Kolkevi", "List Barely", "Rasmus Lerdrof", "None of the above"], answer: "Rasmus Lerdrof" },
+        { question: "CSS stands for?", options: ["Cascade style sheets", "Color and style sheets", "Cascading style sheets", "None of the above"], answer: "Cascading style sheets" },
+        { question: "Which of the following is the default file extension of PHP? ?", options: [".php", ".hphp", ".xml", ".html"], answer: ".php" },
+        { question: "Which one of the following also known as Conditional Expression:", options: ["Alternative to if-else", "Switch statement", "If-then-else statement", "immediate if"], answer: "immediate if" },
+        { question: "In JavaScript, what is a block of statement?", options: ["Conditional block", "block that combines a number of statements into a single compound statement", "block that contains a single statement", "both conditional block and a single statement"], answer: "block that combines a number of statements into a single compound statement" },
+        { question: "The function and  var are known as____", options: ["Keywords", "Data types", "Declaration statements", "Prototypes"], answer: "Declaration statements" },
+        { question: "Arrays in JavaScript are defined by which of the following statements?", options: ["It is an ordered list of values", "It is an ordered list of objects", "It is an ordered list of string", "It is an ordered list of functions"], answer: "It is an ordered list of values" },
+        { question: "Which of the following is not javascript data types?", options: ["Number type", "Undefined type", "Null type", "All of the mentioned"], answer: "All of the mentioned" },
+        { question: "Which of the following scoping type does JavaScript use?", options: ["Sequential", "Segmental", "Lexical", "Literal"], answer: "Lexical" },
+        { question: "What is the basic difference between JavaScript and Java?", options: ["Functions are considered as fields", "Functions are values, and there is no hard distinction between methods and fields", "Variables are specific", "There is no difference"], answer: "Functions are values, and there is no hard distinction between methods and fields" },
+        { question: "Why JavaScript Engine is needed?", options: ["Both Compiling & Interpreting the JavaScript", "Parsing the javascript", "Interpreting the JavaScript", "Compiling the JavaScript"], answer: "Interpreting the JavaScript" },
+        { question: "Why event handlers is needed in JS?", options: ["Allows JavaScript code to alter the behaviour of windows", "Adds innerHTML page to the code", "Change the server location", "Performs handling of exceptions and occurrences"], answer: "Allows JavaScript code to alter the behaviour of windows" },
+        { question: "Which of the following is not a framework?", options: ["JavaScript .NET", "JavaScript", "Cocoa JS", "jQuery"], answer: "JavaScript" },
+        { question: "Which of the following is the property that is triggered in response to JS errors?", options: ["onclick", "onerror", "onmessage", "onexception"], answer: "onerror" },
+        { question: "Which of the following is not an error in JavaScript?", options: ["Missing of Bracket", "Division by zero", "Syntax error", "Missing of semicolons"], answer: "Division by zero" },
+        { question: "To which object does the location property belong?", options: ["Window", "Position", "Element", "Location"], answer: "Window" },
+        { question: "Which of the following is a correct syntax to display “Hello World” in an alert box using JavaScript?", options: ["alertBox('Hello World');", "alert('Hello World');", "msgAlert('Hello World');", "displayAlert('Hello World');"], answer: "alert('Hello World');" },
+        { question: "In JavaScript, which of the following is a valid variable name?", options: ["2names", "-name", "$name", "name2"], answer: "$name" }
+        ]
+    
+
+    function AddQuestions() {
+        let add_html = "";
+
+        Quiz_question.forEach((value, question_index) => {
+            add_html += `<h2>${value.question}</h2>
+                
+                ${value.options.map((option, index) => {
+                return (
+                    `
+                    <input type="radio" name="question${question_index}" value="${option}">${option} <br>
+                `
+                )
+            }).join("")}   
+               
+                `;
+        });
+
+        $("#container").html(add_html);
+        
+    }
+
+    $(document).ready(function () {
+
+        AddQuestions();
+
+        $("#submit").click(function (e) {
+            e.preventDefault();
+            let score = 0;
+
+            Quiz_question.forEach((value, index) => {
+
+                let checked_option = $(`input[name="question${index}"]:checked`).val();
+
+                if (checked_option == value.answer) {
+
+                    score++;
+                }
+
+                
+            })
+            // console.log(`you get ${score} marks`);
+            if(score >=15){
+                alert(`you are pass your score is ${score}`)
+            }else{
+                alert(`you are fail your score is ${score}`)
+            }
+        });
+    });
+
+</script>
+
+</html>
